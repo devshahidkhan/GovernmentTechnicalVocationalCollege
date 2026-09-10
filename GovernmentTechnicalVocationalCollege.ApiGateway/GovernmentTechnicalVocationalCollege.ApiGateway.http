@@ -1,0 +1,6 @@
+@GovernmentTechnicalVocationalCollege.ApiGateway_HostAddress = http://localhost:5142
+
+GET {{GovernmentTechnicalVocationalCollege.ApiGateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
