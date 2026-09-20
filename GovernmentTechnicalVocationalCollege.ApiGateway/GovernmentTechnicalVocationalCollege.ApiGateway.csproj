@@ -8,6 +8,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GovernmentTechnicalVocationalCollege.Application\GovernmentTechnicalVocationalCollege.Application.csproj" />
+    <ProjectReference Include="..\GovernmentTechnicalVocationalCollege.Presentation\GovernmentTechnicalVocationalCollege.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
