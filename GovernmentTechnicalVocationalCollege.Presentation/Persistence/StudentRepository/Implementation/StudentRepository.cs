@@ -14,5 +14,10 @@ namespace GovernmentTechnicalVocationalCollege.Presentation.Persistence.StudentR
             await context.Students.AddAsync(student);
             await context.SaveChangesAsync();
         }
+
+        public Task<List<Student>> GetAllStudentsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

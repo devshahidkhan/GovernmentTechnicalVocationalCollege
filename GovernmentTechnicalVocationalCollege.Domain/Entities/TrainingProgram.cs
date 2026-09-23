@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 {
-    public class Program
+    public class TrainingProgram
     {
         public Guid Id { get; set; }
 
@@ -19,13 +19,14 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 
         public string? Description { get; set; }
 
-        public decimal Fee { get; set; }
+        //public decimal Fee { get; set; }
 
         public bool IsActive { get; set; } = true;
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
+        // Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
     }
 }

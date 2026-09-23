@@ -1,4 +1,5 @@
-﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
+﻿
+using GovernmentTechnicalVocationalCollege.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,27 +10,37 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
     {
         public Guid Id { get; set; }
 
+        // Unique business identifier
         public string AdmissionNo { get; set; } = null!;
 
-        // Foreign Keys
+        // Relationships
         public Guid StudentId { get; set; }
-        public Guid ProgramId { get; set; }
+        public Guid TrainingProgramId { get; set; }
         public Guid AcademicSessionId { get; set; }
 
-        public DateTime ApplicationDate { get; set; }
-
-        public DateTime? AdmissionDate { get; set; }
+        // Admission lifecycle
+        public DateOnly ApplicationDate { get; set; }
+        public DateOnly? AdmissionDate { get; set; }
 
         public AdmissionStatus Status { get; set; }
 
+        // Reason for rejection, cancellation, withdrawal, expulsion, etc.
+        public string? StatusReason { get; set; }
         public string? Remarks { get; set; }
 
+        // Audit
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        // Navigation Properties
+
+        // Navigation properties
+
         public Student Student { get; set; } = null!;
-        public Program Program { get; set; } = null!;
+        public TrainingProgram TrainingProgram { get; set; } = null!;
         public AcademicSession AcademicSession { get; set; } = null!;
+
+        // Status change history
+        //public ICollection<AdmissionStatusHistory> StatusHistory { get; set; }
+        //    = new List<AdmissionStatusHistory>();
     }
 }

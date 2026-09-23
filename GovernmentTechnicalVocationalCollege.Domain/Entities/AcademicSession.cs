@@ -16,6 +16,11 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 
         public bool IsActive { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        // Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
     }
 }

@@ -8,7 +8,11 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Enums
     {
         Pending = 1,
         Approved = 2,
-        Rejected = 3,
-        Cancelled = 4
+        Active = 3,
+        Completed = 4,
+        Rejected = 5,
+        Cancelled = 6,
+        Withdrawn = 7,
+        Expelled = 8
     }
 }
