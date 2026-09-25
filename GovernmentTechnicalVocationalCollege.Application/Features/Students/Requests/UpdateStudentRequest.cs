@@ -1,11 +1,9 @@
 ﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Requests
 {
-    public record CreateStudentRequest(
+    public record UpdateStudentRequest(
         string FirstName,
         string LastName,
         string FatherName,
@@ -15,6 +13,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Req
         string Phone,
         string? Email,
         string Address,
-        string City
+        string City,
+        string? ProfilePhotoUrl
         );
 }

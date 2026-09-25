@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Requests
+namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Responses
 {
-    public record CreateStudentRequest(
+    public record StudentDetailsResponse(
+        Guid Id,
+        string RegistrationNo,
         string FirstName,
         string LastName,
         string FatherName,
@@ -15,6 +17,10 @@ namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Req
         string Phone,
         string? Email,
         string Address,
-        string City
+        string City,
+        string? ProfilePhotoUrl,
+        StudentStatus Status,
+        DateTime CreatedAt,
+        DateTime? UpdatedAt
         );
 }

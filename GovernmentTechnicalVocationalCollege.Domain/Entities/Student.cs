@@ -10,34 +10,33 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
     {
         public Guid Id { get; set; }
 
-        public string? RegistrationNo { get; set; }
+        public string RegistrationNo { get; set; } = string.Empty;
 
-        public string? FirstName { get; set; } 
+        public string FirstName { get; set; } = string.Empty;
 
-        public string? LastName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
-        public string? FatherName { get; set; }
+        public string FatherName { get; set; } = string.Empty;
 
-        public string? CNIC { get; set; }
+        public string CNIC { get; set; } = string.Empty;
 
-        public DateOnly? DateOfBirth { get; set; }
+        public DateOnly? DateOfBirth { get; set; } 
 
-        public Gender? Gender { get; set; }
+        public Gender? Gender { get; set; } 
 
-        public string Phone { get; set; } = null!;
+        public string Phone { get; set; } = string.Empty;
 
-        public string? Email { get; set; }
+        public string? Email { get; set; } 
+        public string Address { get; set; } = string.Empty;
 
-        public string? Address { get; set; }
-
-        public string? City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         public string? ProfilePhotoUrl { get; set; }
 
         public StudentStatus Status { get; set; } = StudentStatus.Active;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
     }

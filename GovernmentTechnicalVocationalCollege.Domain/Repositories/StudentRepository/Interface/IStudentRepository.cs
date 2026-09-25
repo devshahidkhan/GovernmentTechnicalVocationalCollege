@@ -8,6 +8,8 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentReposi
     public interface IStudentRepository
     {
         Task AddStudentAsync(Student student);
-        Task<List<Student>> GetAllStudentsAsync();
+        Task<List<Student>> GetAllAsync();
+        Task<Student?> GetByIdAsync(Guid id);
+        Task UpdateStudentAsync(Student student);
     }
 }

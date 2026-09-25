@@ -3,7 +3,7 @@ using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRe
 using GovernmentTechnicalVocationalCollege.Infrastructure.Data;
 
 
-namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.AcademicSessionRepository.Implementation
+namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories
 {
     public class AcademicSessionRepository(ApplicationDbContext context) : IAcademicSessionRepository
     {

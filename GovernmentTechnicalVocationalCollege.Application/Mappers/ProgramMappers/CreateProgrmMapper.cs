@@ -18,7 +18,6 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.ProgramMapper
                 DurationValue = request.DurationValue,
                 DurationUnit = request.DurationUnit,
                 Description = request.Description,
-                Fee = request.Fee,
                 IsActive = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow

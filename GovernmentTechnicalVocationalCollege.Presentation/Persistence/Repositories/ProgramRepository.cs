@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GovernmentTechnicalVocationalCollege.Presentation.Persistence.ProgramRepository.Implementation
+namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories
 {
     public class ProgramRepository(ApplicationDbContext context) : IProgramRepository
     {
