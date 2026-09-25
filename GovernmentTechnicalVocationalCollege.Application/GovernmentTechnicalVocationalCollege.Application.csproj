@@ -24,7 +24,6 @@
   <ItemGroup>
     <Folder Include="Features\AcademicSessions\Responces\" />
     <Folder Include="Features\Admissions\Responces\" />
-    <Folder Include="Features\Programs\Responces\" />
     <Folder Include="Mappers\AcademicSessionMappers\" />
   </ItemGroup>
 

@@ -5,11 +5,13 @@ using System.Text;
 
 namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Requests
 {
-    public record CreateProgramRequest(
+    public record UpdateProgramRequest(
         string? Code,
         string? Name,
         int DurationValue,
         DurationUnit DurationUnit,
-        string? Description
+        string? Description,
+        bool IsActive,
+        DateTime UpdatedAt
         );
 }
