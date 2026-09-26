@@ -1,9 +1,13 @@
 //using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation;
 //using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface;
+using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Implementation;
+using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.StudentService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.StudentService.Interface;
+using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
+
 //using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository.Interface;
@@ -30,6 +34,9 @@ builder.Services.AddScoped<IStudentService,StudentService>();
 
 builder.Services.AddScoped<IProgramRepository, ProgramRepository>();
 builder.Services.AddScoped<IProgramService, ProgramService>();
+
+builder.Services.AddScoped<IAcademicSessionRepository, AcademicSessionRepository>();
+builder.Services.AddScoped<IAcademicSessionService, AcademicSessionService>();
 
 //builder.Services.AddScoped<IAdmissionRepository, AdmissionRepository>();
 //builder.Services.AddScoped<IAdmissionService, AdmissionService>();

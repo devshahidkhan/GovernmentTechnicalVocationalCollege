@@ -12,6 +12,6 @@ namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Res
         string? Description,
         bool IsActive,
         DateTime CreatedAt,
-        DateTime UpdatedAt
+        DateTime? UpdatedAt
         );
 }

@@ -1,11 +1,8 @@
 ﻿using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Requests;
 using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responses;
 using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.Interface;
-using GovernmentTechnicalVocationalCollege.Domain.Entities;
-using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+
 
 namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
 {

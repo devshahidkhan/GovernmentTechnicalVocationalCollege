@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GovernmentTechnicalVocationalCollege.Domain.Entities
+﻿namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 {
     public class AcademicSession
     {
@@ -18,7 +14,7 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 
         public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         // Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();

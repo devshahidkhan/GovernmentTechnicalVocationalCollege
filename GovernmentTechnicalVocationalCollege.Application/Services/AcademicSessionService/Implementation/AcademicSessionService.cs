@@ -1,22 +1,40 @@
 ﻿using GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Requests;
-using GovernmentTechnicalVocationalCollege.Domain.Entities;
+using GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Responces;
+using GovernmentTechnicalVocationalCollege.Application.Mappers.AcademicSessionMappers;
+using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Implementation
 {
-    public class AcademicSessionService(IAcademicSessionRepository repository)
+    public class AcademicSessionService(IAcademicSessionRepository repository) : IAcademicSessionService
     {
-        
-        private AcademicSession MapToEntity(CreateAcademicSessionRequest request)
+        public async Task<string> CreateAcademicSessionAsync(CreateAcademicSessionRequest request)
         {
-            return new AcademicSession{
-                Name = request.Name,
-                StartDate = request.StartDate,
-                EndDate = request.EndDate,
-            };
+            var academicSession = request.MapToEntity();
+            await repository.AddAsync(academicSession);
+            return "Academic Session Saved Successfully!";
+        }
+
+        public async Task<List<AcademicSessionListResponse>> GetAllAsync()
+        {
+            var academicSessions = await repository.GetAllAsync();
+            return academicSessions.Select(a => a.MapToListResponse()).ToList();
+        }
+
+        public async Task<AcademicSessionDetailsResponse?> GetByIdAsync(Guid id)
+        {
+            var academicSession = await repository.GetByIdAsync(id);
+            return academicSession?.MapToDetailsResponse();
+        }
+
+        public async Task<string> UpdateAcademicSessionAsync(UpdateAcademicSessionRequest request,Guid id)
+        {
+            var academicSession = await repository.GetByIdAsync(id);
+            if (academicSession == null)
+                return "Academic Session is not found";
+            request.MapToEntity(academicSession);
+            await repository.UpdateAsync(academicSession);
+            return "Academic Session Updated Successfully!";
         }
     }
 }

@@ -22,9 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\AcademicSessions\Responces\" />
     <Folder Include="Features\Admissions\Responces\" />
-    <Folder Include="Mappers\AcademicSessionMappers\" />
   </ItemGroup>
 
 </Project>
