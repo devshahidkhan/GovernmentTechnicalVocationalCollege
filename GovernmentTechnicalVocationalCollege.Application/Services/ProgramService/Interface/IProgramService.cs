@@ -1,5 +1,5 @@
 ﻿using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Requests;
-using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responces;
+using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responses;
 using GovernmentTechnicalVocationalCollege.Domain.Entities;
 
 
@@ -8,8 +8,8 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.ProgramServi
     public interface IProgramService
     {
         Task<string> CreateProgramAsync(CreateProgramRequest request);
-        Task<List<ProgramListResponce>> GetAllProgramsAsync();
-        Task<ProgramDetailsResponce?> GetByIdAsync(Guid id);
+        Task<List<ProgramListResponse>> GetAllProgramsAsync();
+        Task<ProgramDetailsResponse?> GetByIdAsync(Guid id);
         Task<string> UpdateProgramAsync(UpdateProgramRequest program,Guid id);
     }
 }

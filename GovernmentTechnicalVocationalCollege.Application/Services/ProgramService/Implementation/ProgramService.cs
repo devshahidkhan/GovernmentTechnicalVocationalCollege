@@ -1,5 +1,5 @@
 ﻿using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Requests;
-using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responces;
+using GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responses;
 using GovernmentTechnicalVocationalCollege.Application.Mappers.ProgramMappers;
 using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
@@ -16,16 +16,16 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.ProgramServi
             return "Add Program Successfully!";
         }
 
-        public async Task<List<ProgramListResponce>> GetAllProgramsAsync()
+        public async Task<List<ProgramListResponse>> GetAllProgramsAsync()
         {
             var programs = await repository.GetAllAsync();
-            return programs.Select(x => x.MapToListResponce()).ToList();
+            return programs.Select(x => x.MapToListResponse()).ToList();
         }
 
-        public async Task<ProgramDetailsResponce?> GetByIdAsync(Guid id)
+        public async Task<ProgramDetailsResponse?> GetByIdAsync(Guid id)
         {
             var programs = await repository.GetByIdAsync(id);
-            return programs?.MapToDetailsResponce();
+            return programs?.MapToDetailsResponse();
         }
 
         public async Task<string> UpdateProgramAsync(UpdateProgramRequest request,Guid id)
@@ -33,6 +33,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.ProgramServi
             var program = await repository.GetByIdAsync(id);
             if (program == null)
                 return "Program not found";
+            request.MapToEntity(program);
             await repository.UpdateAsync(program);
             return "Program update succefully!";
         }

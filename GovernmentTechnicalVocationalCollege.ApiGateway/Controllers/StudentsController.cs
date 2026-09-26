@@ -8,21 +8,21 @@ namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
     [ApiController]
     public class StudentsController(IStudentService service) : ControllerBase
     {
-        [HttpPost("CreateStudent")]
+        [HttpPost]
         public async Task<IActionResult> CreateStudent(CreateStudentRequest request)
         {
             var isSaved = await service.CreateStudentAsync(request);
             return Ok(isSaved);
         }
 
-        [HttpGet("GetAllStudents")]
+        [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
             var users = await service.GetAllStudentsAsync();
             return Ok(users);
         }
 
-        [HttpGet("GetById/{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
             var student = await service.GetByIdAsync(id);
@@ -33,7 +33,7 @@ namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
             return Ok(student);
         }
 
-        [HttpPut("UpdateStudent/{id:guid}")]
+        [HttpPut("{id:guid}")]
         public async Task<IActionResult> UpdateStudent(Guid id,UpdateStudentRequest request)
         {
             var isUpdate = await service.UpdateStudentAsync(id, request);

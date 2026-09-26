@@ -1,14 +1,12 @@
 ﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responces
+
+namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responses
 {
-    public record ProgramDetailsResponce(
+    public record ProgramDetailsResponse(
         Guid Id,
-        string? Code,
-        string? Name,
+        string Code,
+        string Name,
         int DurationValue,
         DurationUnit DurationUnit,
         string? Description,

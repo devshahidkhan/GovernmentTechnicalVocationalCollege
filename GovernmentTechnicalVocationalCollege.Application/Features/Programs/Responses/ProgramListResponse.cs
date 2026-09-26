@@ -1,9 +1,9 @@
 ﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
 
-
-namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Requests
+namespace GovernmentTechnicalVocationalCollege.Application.Features.Programs.Responses
 {
-    public record UpdateProgramRequest(
+    public record ProgramListResponse(
+        Guid Id,
         string Code,
         string Name,
         int DurationValue,
