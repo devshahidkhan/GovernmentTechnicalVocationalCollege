@@ -1,9 +1,5 @@
 ﻿
 using GovernmentTechnicalVocationalCollege.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 {
     public class Admission
@@ -11,7 +7,7 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public Guid Id { get; set; }
 
         // Unique business identifier
-        public string AdmissionNo { get; set; } = null!;
+        public string AdmissionNo { get; set; } = string.Empty;
 
         // Relationships
         public Guid StudentId { get; set; }
@@ -29,8 +25,8 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public string? Remarks { get; set; }
 
         // Audit
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; }
 
 
         // Navigation properties

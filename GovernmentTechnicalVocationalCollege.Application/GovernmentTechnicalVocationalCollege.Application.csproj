@@ -21,8 +21,4 @@
     <ProjectReference Include="..\GovernmentTechnicalVocationalCollege.Domain\GovernmentTechnicalVocationalCollege.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Admissions\Responces\" />
-  </ItemGroup>
-
 </Project>

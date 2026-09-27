@@ -1,12 +1,21 @@
-﻿//using GovernmentTechnicalVocationalCollege.Domain.Entities;
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using GovernmentTechnicalVocationalCollege.Domain.Entities;
 
-//namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface
-//{
-//    public interface IAdmissionRepository
-//    {
-//        Task AddAdmissionsAsync(Admission admission);
-//    }
-//}
+namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface
+{
+    public interface IAdmissionRepository
+    {
+        Task AddAsync(Admission admission);
+
+        Task<List<Admission>> GetAllAsync();
+
+        Task<Admission?> GetByIdAsync(Guid id);
+
+        Task<bool> ExistsAsync(
+            Guid studentId,
+            Guid trainingProgramId,
+            Guid academicSessionId,
+            Guid? excludeAdmissionId = null);
+
+        Task SaveChangesAsync();
+    }
+}

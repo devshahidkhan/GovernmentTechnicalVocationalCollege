@@ -1,12 +1,16 @@
-﻿//using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Requests;
-//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Requests;
+using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Responses;
 
-//namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface
-//{
-//    public interface IAdmissionService
-//    {
-//        Task<string> CreateAdmissionAsync(CreateAdmissionRequest request);
-//    }
-//}
+namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface
+{
+    public interface IAdmissionService
+    {
+        Task<AdmissionDetailsResponse> CreateAdmissionAsync(CreateAdmissionRequest request);
+
+        Task<List<AdmissionListResponse>> GetAllAsync();
+
+        Task<AdmissionDetailsResponse?> GetByIdAsync(Guid id);
+
+        Task<bool> UpdateAdmissionAsync(Guid id, UpdateAdmissionRequest request);
+    }
+}

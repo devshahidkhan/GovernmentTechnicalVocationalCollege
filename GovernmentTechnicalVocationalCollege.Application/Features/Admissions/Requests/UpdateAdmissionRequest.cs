@@ -5,11 +5,10 @@ using System.Text;
 
 namespace GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Requests
 {
-    public record CreateAdmissionRequest(
-        Guid StudentId,
-        Guid TrainingProgramId,
-        Guid AcademicSessionId,
-        DateOnly ApplicationDate,
+    public record UpdateAdmissionRequest(
+        DateOnly? AdmissionDate,
+        AdmissionStatus Status,
+        string? StatusReason,
         string? Remarks
         );
 }
