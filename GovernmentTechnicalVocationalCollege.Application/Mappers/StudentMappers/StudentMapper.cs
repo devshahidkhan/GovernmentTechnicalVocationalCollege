@@ -7,12 +7,12 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMapper
 {
     public static class StudentMapper
     {
-        public static Student MapToEntity(this CreateStudentRequest request/*string registrationNo*/)
+        public static Student MapToEntity(this CreateStudentRequest request,string registrationNo)
         {
             return new Student
             {
                 Id = Guid.NewGuid(),
-                //RegistrationNo = registrationNo,
+                RegistrationNo = registrationNo,
 
                 FirstName = request.FirstName,
                 LastName = request.LastName,

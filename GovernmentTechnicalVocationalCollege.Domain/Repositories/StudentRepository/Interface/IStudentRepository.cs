@@ -1,15 +1,19 @@
 ﻿using GovernmentTechnicalVocationalCollege.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository.Interface
+namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository;
+
+public interface IStudentRepository
 {
-    public interface IStudentRepository
-    {
-        Task AddStudentAsync(Student student);
-        Task<List<Student>> GetAllAsync();
-        Task<Student?> GetByIdAsync(Guid id);
-        Task UpdateStudentAsync(Student student);
-    }
+    Task AddAsync(Student student);
+
+    Task<List<Student>> GetAllAsync();
+
+    Task<Student?> GetByIdAsync(Guid id);
+
+    Task<bool> ExistsByRegistrationNoAsync( string registrationNo);
+
+    Task SaveChangesAsync();
+
+    Task<bool> ExistsByCnicAsync(string cnic);
+    Task<bool> ExistsByPhoneAsync(string phone);
 }

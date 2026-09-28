@@ -5,7 +5,8 @@ using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
-using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository.Interface;
+using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository;
+
 
 namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation
 {
