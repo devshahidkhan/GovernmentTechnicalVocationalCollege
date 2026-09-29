@@ -51,6 +51,15 @@ public class StudentService(IStudentRepository repository): IStudentService
         if (student is null)
             return ApiResponse<string>.Failure("A student with this Id does not exists."); ;
 
+        if (await repository.ExistsByCnicAsync(request.CNIC))
+        {
+            return ApiResponse<string>.Failure("A student with this CNIC already exists.");
+        }
+
+        if (await repository.ExistsByPhoneAsync(request.Phone))
+        {
+            return ApiResponse<string>.Failure("A student with this phone number already exists.");
+        }
 
         request.MapToEntity(student);
 

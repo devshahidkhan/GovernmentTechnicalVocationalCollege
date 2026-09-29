@@ -10,7 +10,7 @@ public interface IStudentRepository
 
     Task<Student?> GetByIdAsync(Guid id);
 
-    Task<bool> ExistsByRegistrationNoAsync( string registrationNo);
+    Task<bool> ExistsByRegistrationNoAsync(string registrationNo);
 
     Task SaveChangesAsync();
 
