@@ -7,6 +7,6 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessi
         Task AddAsync(AcademicSession session);
         Task<List<AcademicSession>> GetAllAsync();
         Task<AcademicSession?> GetByIdAsync(Guid id);
-        Task UpdateAsync(AcademicSession session);
+        Task SaveChangesAsync();
     }
 }

@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/academic-sessions")]
     [ApiController]
-    public class AcademicSessionsController(IAcademicSessionService service) : ControllerBase
+    public class AcademicSessionsController(IAcademicSessionService service): ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateAcademicSessionRequest request)
+        public async Task<IActionResult> Create(CreateAcademicSessionRequest request)
         {
-            var response = await service.CreateAcademicSessionAsync(request);
+            var response =await service.CreateAcademicSessionAsync(request);
             return Ok(response);
-        }    
+        }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -35,14 +35,10 @@ namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        public IActionResult Update(UpdateAcademicSessionRequest request, Guid id)
+        public async Task<IActionResult> Update(Guid id,UpdateAcademicSessionRequest request)
         {
-            var update = service.UpdateAcademicSessionAsync(request, id);
-
-            return Ok(new
-            {
-                message = update
-            });
+            var updated = await service.UpdateAcademicSessionAsync(request, id);
+            return Ok(updated);
         }
     }
 }

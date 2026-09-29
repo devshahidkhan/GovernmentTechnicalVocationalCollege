@@ -1,9 +1,7 @@
 ﻿using GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Requests;
 using GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Responces;
 using GovernmentTechnicalVocationalCollege.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace GovernmentTechnicalVocationalCollege.Application.Mappers.AcademicSessionMappers
 {
@@ -31,8 +29,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.AcademicSessi
                 session.Name,
                 session.StartDate,
                 session.EndDate,
-                session.IsActive
-            );
+                session.IsActive);
         }
 
         public static AcademicSessionDetailsResponse MapToDetailsResponse(this AcademicSession session)
@@ -44,8 +41,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.AcademicSessi
                 session.EndDate,
                 session.IsActive,
                 session.CreatedAt,
-                session.UpdatedAt
-            );
+                session.UpdatedAt);
         }
 
         public static void MapToEntity(this UpdateAcademicSessionRequest request, AcademicSession session)

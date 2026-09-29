@@ -14,7 +14,7 @@ public class ProgramService(IProgramRepository repository): IProgramService
 
         if (await repository.ExistsByCodeAsync(request.Code))
         {
-            return ApiResponse<string>.Failure("A student with this Code already exists.");
+            return ApiResponse<string>.Failure("A program with this Code already exists.");
         }
 
 
@@ -44,11 +44,11 @@ public class ProgramService(IProgramRepository repository): IProgramService
         var program = await repository.GetByIdAsync(id);
 
         if (program is null)
-           return ApiResponse<string>.Failure("A student with this Id does not exists");
+           return ApiResponse<string>.Failure("A program with this Id does not exists");
 
         if (await repository.ExistsByCodeAsync(request.Code))
         {
-            return ApiResponse<string>.Failure("A student with this Code already exists.");
+            return ApiResponse<string>.Failure("A program with this Code already exists.");
         }
 
         request.MapToEntity(program);

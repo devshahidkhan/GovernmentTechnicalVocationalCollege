@@ -6,17 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories
 {
-    public class AcademicSessionRepository(ApplicationDbContext context) : IAcademicSessionRepository
+    public class AcademicSessionRepository(ApplicationDbContext context): IAcademicSessionRepository
     {
         public async Task AddAsync(AcademicSession session)
         {
             await context.AcademicSessions.AddAsync(session);
-            await context.SaveChangesAsync();
         }
 
-        public Task<List<AcademicSession>> GetAllAsync()
+        public async Task<List<AcademicSession>> GetAllAsync()
         {
-            return context.AcademicSessions.AsNoTracking().ToListAsync();
+            return await context.AcademicSessions.AsNoTracking().ToListAsync();
         }
 
         public async Task<AcademicSession?> GetByIdAsync(Guid id)
@@ -24,9 +23,8 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Reposi
             return await context.AcademicSessions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task UpdateAsync(AcademicSession session)
+        public async Task SaveChangesAsync()
         {
-            context.AcademicSessions.Update(session);
             await context.SaveChangesAsync();
         }
     }
