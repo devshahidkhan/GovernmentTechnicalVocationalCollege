@@ -10,11 +10,7 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepo
 
         Task<Admission?> GetByIdAsync(Guid id);
 
-        Task<bool> ExistsAsync(
-            Guid studentId,
-            Guid trainingProgramId,
-            Guid academicSessionId,
-            Guid? excludeAdmissionId = null);
+        Task<bool> ExistsAsync(Guid studentId,Guid trainingProgramId,Guid academicSessionId);
 
         Task SaveChangesAsync();
     }

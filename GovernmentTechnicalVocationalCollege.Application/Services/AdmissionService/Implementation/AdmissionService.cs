@@ -1,4 +1,5 @@
-﻿using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Requests;
+﻿using GovernmentTechnicalVocationalCollege.Application.Common.APIResponses;
+using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Requests;
 using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Responses;
 using GovernmentTechnicalVocationalCollege.Application.Mappers.AdmissionMappers;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface;
@@ -10,35 +11,27 @@ using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository
 
 namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation
 {
-    public class AdmissionService(
-        IAdmissionRepository repository,
-        IStudentRepository studentRepository,
-        IProgramRepository programRepository,
-        IAcademicSessionRepository academicSessionRepository)
-        : IAdmissionService
+    public class AdmissionService(IAdmissionRepository repository, IStudentRepository studentRepository,  IProgramRepository programRepository,IAcademicSessionRepository academicSessionRepository): IAdmissionService
     {
-        public async Task<AdmissionDetailsResponse> CreateAdmissionAsync(CreateAdmissionRequest request)
+        public async Task<ApiResponse<string>> CreateAdmissionAsync(CreateAdmissionRequest request)
         {
             // 1. Validate Student
             var student = await studentRepository.GetByIdAsync(request.StudentId);
 
             if (student is null)
-                throw new InvalidOperationException
-                    ("Student does not exist.");
+                ApiResponse<string>.Failure("Student does not exist.");
 
             // 2. Validate Training Program
             var program = await programRepository.GetByIdAsync(request.TrainingProgramId);
 
             if (program is null)
-                throw new InvalidOperationException
-                    ("Training program does not exist.");
+                ApiResponse<string>.Failure("Training program does not exist.");
 
             // 3. Validate Academic Session
             var session = await academicSessionRepository.GetByIdAsync(request.AcademicSessionId);
 
             if (session is null)
-                throw new InvalidOperationException
-                    ("Academic session does not exist.");
+               ApiResponse<string>.Failure("Academic session does not exist.");
 
             // 4. Prevent duplicate admission
             var exists = await repository.ExistsAsync(
@@ -48,8 +41,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionSer
 
             if (exists)
             {
-                throw new InvalidOperationException(
-                    "An admission already exists for this student, training program and academic session.");
+               ApiResponse<string>.Failure("An admission already exists for this student, training program and academic session.");
             }
 
             // 5. Generate business admission number
@@ -61,37 +53,34 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionSer
             // 7. Save
             await repository.AddAsync(admission);
             await repository.SaveChangesAsync();
+            return ApiResponse<string>.Success("Admission of student created successfully!");
 
-            // 8. Return created admission
-            return admission.MapToDetailsResponse();
         }
 
         public async Task<List<AdmissionListResponse>> GetAllAsync()
         {
             var admissions = await repository.GetAllAsync();
-
             return admissions.Select(x => x.MapToListResponse()).ToList();
         }
 
         public async Task<AdmissionDetailsResponse?> GetByIdAsync(Guid id)
         {
             var admission = await repository.GetByIdAsync(id);
-
             return admission?.MapToDetailsResponse();
         }
 
-        public async Task<bool> UpdateAdmissionAsync(Guid id,UpdateAdmissionRequest request)
+        public async Task<ApiResponse<string>> UpdateAdmissionAsync(Guid id,UpdateAdmissionRequest request)
         {
             var admission = await repository.GetByIdAsync(id);
 
             if (admission is null)
-                return false;
+                return ApiResponse<string>.Failure("A Admission with this Id does not exiss.");
 
             request.MapToEntity(admission);
 
             await repository.SaveChangesAsync();
 
-            return true;
+            return ApiResponse<string>.Success("A student Admission has update successfully!");
         }
 
         private static string GenerateAdmissionNo(DateOnly applicationDate)
@@ -101,7 +90,6 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionSer
                 .ToString("N")
                 .Substring(0, 8)
                 .ToUpperInvariant();
-
             return $"ADM-{year}-{uniquePart}";
         }
     }

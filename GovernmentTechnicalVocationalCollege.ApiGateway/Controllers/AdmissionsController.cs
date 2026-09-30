@@ -11,25 +11,8 @@ namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAdmissionRequest request)
         {
-            try
-            {
-                var response = await service.CreateAdmissionAsync(request);
-                return CreatedAtAction(nameof(GetById),new { id = response.Id },response);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new
-                {
-                    message = ex.Message
-                });
-            }
+            var response = await service.CreateAdmissionAsync(request);
+            return Ok(response);
         }
 
         [HttpGet]
@@ -54,11 +37,7 @@ namespace GovernmentTechnicalVocationalCollege.ApiGateway.Controllers
         public async Task<IActionResult> Update(Guid id,[FromBody] UpdateAdmissionRequest request)
         {
             var updated = await service.UpdateAdmissionAsync(id, request);
-
-            if (!updated)
-                return NotFound();
-
-            return NoContent();
+            return Ok(updated);
         }
     }
 }
