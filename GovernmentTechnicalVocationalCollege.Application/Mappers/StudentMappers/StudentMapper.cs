@@ -9,6 +9,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMapper
     {
         public static Student MapToEntity(this CreateStudentRequest request,string registrationNo)
         {
+            var now = DateTime.UtcNow;
             return new Student
             {
                 Id = Guid.NewGuid(),
@@ -26,7 +27,8 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMapper
                 Email = request.Email,
 
                 Address = request.Address,
-                City = request.City
+                City = request.City,
+                CreatedAt = now,
             };
         }
 

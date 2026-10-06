@@ -35,8 +35,8 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 
         public StudentStatus Status { get; set; } = StudentStatus.Active;
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? UpdatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } 
+        public DateTime? UpdatedAt { get; set; } 
 
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
     }

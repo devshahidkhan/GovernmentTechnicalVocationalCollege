@@ -28,8 +28,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.AdmissionMapp
                 StatusReason = null,
                 Remarks = request.Remarks,
 
-                CreatedAt = now,
-                UpdatedAt = now
+                CreatedAt = now
             };
         }
 

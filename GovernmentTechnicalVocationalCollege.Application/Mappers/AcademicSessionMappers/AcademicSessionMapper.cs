@@ -17,8 +17,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.AcademicSessi
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 IsActive = true,
-                CreatedAt = now,
-                UpdatedAt = now
+                CreatedAt = now
             };
         }
 

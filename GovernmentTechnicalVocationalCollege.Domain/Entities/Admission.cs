@@ -1,5 +1,4 @@
-﻿
-using GovernmentTechnicalVocationalCollege.Domain.Enums;
+﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
 namespace GovernmentTechnicalVocationalCollege.Domain.Entities
 {
     public class Admission
@@ -25,7 +24,7 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public string? Remarks { get; set; }
 
         // Audit
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedAt { get; set; } 
         public DateTime? UpdatedAt { get; set; }
 
 
@@ -34,9 +33,5 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public Student Student { get; set; } = null!;
         public TrainingProgram TrainingProgram { get; set; } = null!;
         public AcademicSession AcademicSession { get; set; } = null!;
-
-        // Status change history
-        //public ICollection<AdmissionStatusHistory> StatusHistory { get; set; }
-        //    = new List<AdmissionStatusHistory>();
     }
 }

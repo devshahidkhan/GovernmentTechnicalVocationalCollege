@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Responces
+﻿namespace GovernmentTechnicalVocationalCollege.Application.Features.AcademicSessions.Responces
 {
     public record AcademicSessionDetailsResponse(
         Guid Id,

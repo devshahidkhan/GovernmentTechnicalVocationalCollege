@@ -25,8 +25,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.ProgramMapper
 
                 IsActive = true,
 
-                CreatedAt = now,
-                UpdatedAt = now
+                CreatedAt = now
             };
         }
 
