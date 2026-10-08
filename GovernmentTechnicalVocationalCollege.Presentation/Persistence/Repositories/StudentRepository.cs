@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories;
 
-public class StudentRepository(ApplicationDbContext context)
-    : IStudentRepository
+public class StudentRepository(ApplicationDbContext context): IStudentRepository
 {
     public async Task AddAsync(Student student)
     {
@@ -15,20 +14,15 @@ public class StudentRepository(ApplicationDbContext context)
 
     public async Task<List<Student>> GetAllAsync()
     {
-        return await context.Students
-            .AsNoTracking()
-            .ToListAsync();
+        return await context.Students.AsNoTracking().ToListAsync();
     }
 
     public async Task<Student?> GetByIdAsync(Guid id)
     {
-        return await context.Students
-            .FirstOrDefaultAsync(x => x.Id == id);
+        return await context.Students.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<bool> ExistsByCnicAsync(
-        string cnic,
-        Guid? excludeStudentId = null)
+    public async Task<bool> ExistsByCnicAsync(string cnic,Guid? excludeStudentId = null)
     {
         return await context.Students.AnyAsync(x =>
             x.CNIC == cnic &&
@@ -36,9 +30,7 @@ public class StudentRepository(ApplicationDbContext context)
              x.Id != excludeStudentId.Value));
     }
 
-    public async Task<bool> ExistsByPhoneAsync(
-        string phone,
-        Guid? excludeStudentId = null)
+    public async Task<bool> ExistsByPhoneAsync(string phone,Guid? excludeStudentId = null)
     {
         return await context.Students.AnyAsync(x =>
             x.Phone == phone &&

@@ -6,9 +6,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMapper
 
 public static class StudentMapper
 {
-    public static Student MapToEntity(
-        this CreateStudentRequest request,
-        string registrationNo)
+    public static Student MapToEntity(this CreateStudentRequest request,string registrationNo)
     {
         var now = DateTime.UtcNow;
 
@@ -36,9 +34,7 @@ public static class StudentMapper
         };
     }
 
-    public static void MapToEntity(
-        this UpdateStudentRequest request,
-        Student student)
+    public static void MapToEntity(this UpdateStudentRequest request,Student student)
     {
         student.FirstName = request.FirstName;
         student.LastName = request.LastName;
@@ -58,8 +54,7 @@ public static class StudentMapper
         student.UpdatedAt = DateTime.UtcNow;
     }
 
-    public static StudentListResponse MapToListResponse(
-        this Student student)
+    public static StudentListResponse MapToListResponse(this Student student)
     {
         return new StudentListResponse(
             student.Id,
@@ -75,8 +70,7 @@ public static class StudentMapper
         );
     }
 
-    public static StudentDetailsResponse MapToDetailsResponse(
-        this Student student)
+    public static StudentDetailsResponse MapToDetailsResponse(this Student student)
     {
         return new StudentDetailsResponse(
             student.Id,

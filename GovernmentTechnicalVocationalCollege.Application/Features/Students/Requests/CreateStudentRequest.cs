@@ -1,6 +1,4 @@
 ﻿using GovernmentTechnicalVocationalCollege.Domain.Enums;
-
-
 namespace GovernmentTechnicalVocationalCollege.Application.Features.Students.Requests
 {
     public record CreateStudentRequest(

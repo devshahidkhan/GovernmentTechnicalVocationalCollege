@@ -3,6 +3,7 @@ using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Reque
 using GovernmentTechnicalVocationalCollege.Application.Features.Admissions.Responses;
 using GovernmentTechnicalVocationalCollege.Application.Mappers.AdmissionMappers;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface;
+using GovernmentTechnicalVocationalCollege.Application.Services.NumberGenerationService.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
@@ -11,7 +12,7 @@ using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository
 
 namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation
 {
-    public class AdmissionService(IAdmissionRepository repository, IStudentRepository studentRepository,  IProgramRepository programRepository,IAcademicSessionRepository academicSessionRepository): IAdmissionService
+    public class AdmissionService(IAdmissionRepository repository, IStudentRepository studentRepository,IProgramRepository programRepository,IAcademicSessionRepository academicSessionRepository,INumberGeneratorService numberGeneratorService): IAdmissionService
     {
         public async Task<ApiResponse<string>> CreateAdmissionAsync(CreateAdmissionRequest request)
         {
@@ -45,7 +46,8 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionSer
             }
 
             // 5. Generate business admission number
-            var admissionNo = GenerateAdmissionNo(request.ApplicationDate);
+            var admissionNo = await numberGeneratorService.GenerateAdmissionNoAsync(request.ApplicationDate.Year);
+
 
             // 6. Map DTO to entity
             var admission = request.MapToEntity(admissionNo);
@@ -81,16 +83,6 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.AdmissionSer
             await repository.SaveChangesAsync();
 
             return ApiResponse<string>.Success("A student Admission has update successfully!");
-        }
-
-        private static string GenerateAdmissionNo(DateOnly applicationDate)
-        {
-            var year = applicationDate.Year;
-            var uniquePart = Guid.NewGuid()
-                .ToString("N")
-                .Substring(0, 8)
-                .ToUpperInvariant();
-            return $"ADM-{year}-{uniquePart}";
         }
     }
 }

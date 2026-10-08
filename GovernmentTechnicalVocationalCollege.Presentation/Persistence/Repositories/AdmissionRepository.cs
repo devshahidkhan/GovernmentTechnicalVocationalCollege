@@ -3,10 +3,10 @@ using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionReposito
 using GovernmentTechnicalVocationalCollege.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-
-namespace GovernmentTechnicalVocationalCollege.Presentation.Persistence.AdmissionRepository.Implementation
+namespace GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories
 {
-    public class AdmissionRepository(ApplicationDbContext context) : IAdmissionRepository
+    public class AdmissionRepository(ApplicationDbContext context)
+        : IAdmissionRepository
     {
         public async Task AddAsync(Admission admission)
         {
@@ -23,12 +23,14 @@ namespace GovernmentTechnicalVocationalCollege.Presentation.Persistence.Admissio
             return await context.Admissions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<bool> ExistsAsync(Guid studentId,Guid trainingProgramId,Guid academicSessionId)
+        public async Task<bool> ExistsAsync(Guid studentId,Guid trainingProgramId,Guid academicSessionId,Guid? excludeAdmissionId = null)
         {
             return await context.Admissions.AnyAsync(x =>
                 x.StudentId == studentId &&
                 x.TrainingProgramId == trainingProgramId &&
-                x.AcademicSessionId == academicSessionId);
+                x.AcademicSessionId == academicSessionId &&
+                (!excludeAdmissionId.HasValue ||
+                 x.Id != excludeAdmissionId.Value));
         }
 
         public async Task SaveChangesAsync()
@@ -37,4 +39,3 @@ namespace GovernmentTechnicalVocationalCollege.Presentation.Persistence.Admissio
         }
     }
 }
-
