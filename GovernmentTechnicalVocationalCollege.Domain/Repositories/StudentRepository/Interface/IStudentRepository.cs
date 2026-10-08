@@ -10,10 +10,13 @@ public interface IStudentRepository
 
     Task<Student?> GetByIdAsync(Guid id);
 
-    Task<bool> ExistsByRegistrationNoAsync(string registrationNo);
+    Task<bool> ExistsByCnicAsync(
+        string cnic,
+        Guid? excludeStudentId = null);
+
+    Task<bool> ExistsByPhoneAsync(
+        string phone,
+        Guid? excludeStudentId = null);
 
     Task SaveChangesAsync();
-
-    Task<bool> ExistsByCnicAsync(string cnic);
-    Task<bool> ExistsByPhoneAsync(string phone);
 }

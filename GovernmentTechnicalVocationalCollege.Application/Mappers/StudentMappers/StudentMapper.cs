@@ -2,92 +2,99 @@
 using GovernmentTechnicalVocationalCollege.Application.Features.Students.Responses;
 using GovernmentTechnicalVocationalCollege.Domain.Entities;
 
+namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMappers;
 
-namespace GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMappers
+public static class StudentMapper
 {
-    public static class StudentMapper
+    public static Student MapToEntity(
+        this CreateStudentRequest request,
+        string registrationNo)
     {
-        public static Student MapToEntity(this CreateStudentRequest request,string registrationNo)
+        var now = DateTime.UtcNow;
+
+        return new Student
         {
-            var now = DateTime.UtcNow;
-            return new Student
-            {
-                Id = Guid.NewGuid(),
-                RegistrationNo = registrationNo,
+            Id = Guid.NewGuid(),
 
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                FatherName = request.FatherName,
-                CNIC = request.CNIC,
+            RegistrationNo = registrationNo,
 
-                DateOfBirth = request.DateOfBirth,
-                Gender = request.Gender,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            FatherName = request.FatherName,
+            CNIC = request.CNIC,
 
-                Phone = request.Phone,
-                Email = request.Email,
+            DateOfBirth = request.DateOfBirth,
+            Gender = request.Gender,
 
-                Address = request.Address,
-                City = request.City,
-                CreatedAt = now,
-            };
-        }
+            Phone = request.Phone,
+            Email = request.Email,
 
-        public static void MapToEntity(this UpdateStudentRequest request,Student student)
-        {
-            student.FirstName = request.FirstName;
-            student.LastName = request.LastName;
-            student.FatherName = request.FatherName;
-            student.CNIC = request.CNIC;
+            Address = request.Address,
+            City = request.City,
 
-            student.DateOfBirth = request.DateOfBirth;
-            student.Gender = request.Gender;
+            CreatedAt = now
+        };
+    }
 
-            student.Phone = request.Phone;
-            student.Email = request.Email;
+    public static void MapToEntity(
+        this UpdateStudentRequest request,
+        Student student)
+    {
+        student.FirstName = request.FirstName;
+        student.LastName = request.LastName;
+        student.FatherName = request.FatherName;
+        student.CNIC = request.CNIC;
 
-            student.Address = request.Address;
-            student.City = request.City;
-            student.ProfilePhotoUrl = request.ProfilePhotoUrl;
+        student.DateOfBirth = request.DateOfBirth;
+        student.Gender = request.Gender;
 
-            student.UpdatedAt = DateTime.UtcNow;
-        }
+        student.Phone = request.Phone;
+        student.Email = request.Email;
 
-        public static StudentListResponse MapToListResponse(this Student student)
-        {
-            return new StudentListResponse(
-                student.Id,
-                student.RegistrationNo,
-                student.FirstName,
-                student.LastName,
-                student.FatherName,
-                student.CNIC,
-                student.Phone,
-                student.Email,
-                student.City,
-                student.Status
-            );
-        }
+        student.Address = request.Address;
+        student.City = request.City;
+        student.ProfilePhotoUrl = request.ProfilePhotoUrl;
 
-        public static StudentDetailsResponse MapToDetailsResponse(this Student student)
-        {
-            return new StudentDetailsResponse(
-                student.Id,
-                student.RegistrationNo,
-                student.FirstName,
-                student.LastName,
-                student.FatherName,
-                student.CNIC,
-                student.DateOfBirth,
-                student.Gender,
-                student.Phone,
-                student.Email,
-                student.Address,
-                student.City,
-                student.ProfilePhotoUrl,
-                student.Status,
-                student.CreatedAt,
-                student.UpdatedAt
-            );
-        }
+        student.UpdatedAt = DateTime.UtcNow;
+    }
+
+    public static StudentListResponse MapToListResponse(
+        this Student student)
+    {
+        return new StudentListResponse(
+            student.Id,
+            student.RegistrationNo,
+            student.FirstName,
+            student.LastName,
+            student.FatherName,
+            student.CNIC,
+            student.Phone,
+            student.Email,
+            student.City,
+            student.Status
+        );
+    }
+
+    public static StudentDetailsResponse MapToDetailsResponse(
+        this Student student)
+    {
+        return new StudentDetailsResponse(
+            student.Id,
+            student.RegistrationNo,
+            student.FirstName,
+            student.LastName,
+            student.FatherName,
+            student.CNIC,
+            student.DateOfBirth,
+            student.Gender,
+            student.Phone,
+            student.Email,
+            student.Address,
+            student.City,
+            student.ProfilePhotoUrl,
+            student.Status,
+            student.CreatedAt,
+            student.UpdatedAt
+        );
     }
 }

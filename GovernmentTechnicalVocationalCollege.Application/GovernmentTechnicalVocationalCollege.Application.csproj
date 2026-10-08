@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GovernmentTechnicalVocationalCollege.Domain\GovernmentTechnicalVocationalCollege.Domain.csproj" />
+    <ProjectReference Include="..\GovernmentTechnicalVocationalCollege.Presentation\GovernmentTechnicalVocationalCollege.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

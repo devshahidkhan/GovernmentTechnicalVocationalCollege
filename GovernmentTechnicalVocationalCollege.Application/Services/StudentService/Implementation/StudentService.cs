@@ -2,11 +2,12 @@
 using GovernmentTechnicalVocationalCollege.Application.Features.Students.Requests;
 using GovernmentTechnicalVocationalCollege.Application.Features.Students.Responses;
 using GovernmentTechnicalVocationalCollege.Application.Mappers.StudentMappers;
+using GovernmentTechnicalVocationalCollege.Application.Services.NumberGenerationService.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository;
 
 namespace GovernmentTechnicalVocationalCollege.Application.Services.StudentService;
 
-public class StudentService(IStudentRepository repository): IStudentService
+public class StudentService(IStudentRepository repository,INumberGeneratorService numberGeneratorService): IStudentService
 {
     public async Task<ApiResponse<string>> CreateStudentAsync(CreateStudentRequest request)
     {
@@ -20,14 +21,16 @@ public class StudentService(IStudentRepository repository): IStudentService
             return ApiResponse<string>.Failure("A student with this phone number already exists.");
         }
 
-        var registrationNo = await GenerateRegistrationNoAsync();
+        var year = DateTime.UtcNow.Year;
 
-        var student = request.MapToEntity(registrationNo); 
+        var registrationNo = await numberGeneratorService.GenerateRegistrationNoAsync(year);
+
+        var student =request.MapToEntity(registrationNo);
 
         await repository.AddAsync(student);
         await repository.SaveChangesAsync();
 
-        return ApiResponse<string>.Success("Student has been Saved Successfully!");
+        return ApiResponse<string>.Success($"Student has been saved successfully. Registration No: {registrationNo}");
     }
 
     public async Task<List<StudentListResponse>> GetAllStudentsAsync()
@@ -44,19 +47,21 @@ public class StudentService(IStudentRepository repository): IStudentService
         return student?.MapToDetailsResponse();
     }
 
-    public async Task<ApiResponse<string>> UpdateStudentAsync(Guid id, UpdateStudentRequest request)
+    public async Task<ApiResponse<string>> UpdateStudentAsync(Guid id,UpdateStudentRequest request)
     {
         var student = await repository.GetByIdAsync(id);
 
         if (student is null)
-            return ApiResponse<string>.Failure("A student with this Id does not exists."); ;
+        {
+            return ApiResponse<string>.Failure("A student with this Id does not exist.");
+        }
 
-        if (await repository.ExistsByCnicAsync(request.CNIC))
+        if (await repository.ExistsByCnicAsync(request.CNIC, id))
         {
             return ApiResponse<string>.Failure("A student with this CNIC already exists.");
         }
 
-        if (await repository.ExistsByPhoneAsync(request.Phone))
+        if (await repository.ExistsByPhoneAsync(request.Phone, id))
         {
             return ApiResponse<string>.Failure("A student with this phone number already exists.");
         }
@@ -65,13 +70,6 @@ public class StudentService(IStudentRepository repository): IStudentService
 
         await repository.SaveChangesAsync();
 
-        return ApiResponse<string>.Success("Student update successfully");
-    }
-
-    private async Task<string> GenerateRegistrationNoAsync()
-    {
-        // Temporary implementation.
-        // Later this should use a dedicated registration-number generator.
-        return $"ST-{DateTime.UtcNow:yyyyMMddHHmmss}";
+        return ApiResponse<string>.Success("Student updated successfully.");
     }
 }
