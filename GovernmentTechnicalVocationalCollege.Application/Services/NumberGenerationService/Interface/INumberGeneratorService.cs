@@ -9,5 +9,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.NumberGenera
         Task<string> GenerateRegistrationNoAsync(int year);
 
         Task<string> GenerateAdmissionNoAsync(int year);
-     }
+
+        Task<string> GenerateEmployeeNoAsync(int year);
+    }
 }

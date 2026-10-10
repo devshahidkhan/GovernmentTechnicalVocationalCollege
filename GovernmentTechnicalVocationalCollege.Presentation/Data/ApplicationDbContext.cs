@@ -15,5 +15,6 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data
         public DbSet<Admission> Admissions { get; set; }
         public DbSet<AcademicSession> AcademicSessions { get; set; }
         public DbSet<NumberSequence> NumberSequences { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
     }
 }

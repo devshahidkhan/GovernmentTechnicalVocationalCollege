@@ -26,14 +26,16 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.NumberGenera
             return $"ADM-{year}-{number:D6}";
         }
 
-        private async Task<int> GetNextNumberAsync(
-            string sequenceType,
-            int year)
+        public async Task<string> GenerateEmployeeNoAsync(int year)
         {
-            await using var transaction =
-                await context.Database.BeginTransactionAsync(
+            var number = await GetNextNumberAsync("Instructor", year);
 
-                    IsolationLevel.Serializable);
+            return $"TCH-{year}-{number:D6}";
+        }
+
+        private async Task<int> GetNextNumberAsync(string sequenceType,int year)
+        {
+            await using var transaction = await context.Database.BeginTransactionAsync(IsolationLevel.Serializable);
 
             var sequence = await context.NumberSequences
                 .SingleOrDefaultAsync(x =>
@@ -66,9 +68,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.NumberGenera
             }
 
             await context.SaveChangesAsync();
-
             await transaction.CommitAsync();
-
             return currentNumber;
         }
     }

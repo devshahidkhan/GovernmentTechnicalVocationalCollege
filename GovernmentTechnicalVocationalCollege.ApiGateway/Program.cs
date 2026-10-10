@@ -2,6 +2,8 @@ using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionS
 using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface;
+using GovernmentTechnicalVocationalCollege.Application.Services.InstructorService.Implementation;
+using GovernmentTechnicalVocationalCollege.Application.Services.InstructorService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.NumberGenerationService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.NumberGenerationService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.Implementation;
@@ -9,12 +11,13 @@ using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.I
 using GovernmentTechnicalVocationalCollege.Application.Services.StudentService;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface;
+using GovernmentTechnicalVocationalCollege.Domain.Repositories.InstructorRepository;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository;
 using GovernmentTechnicalVocationalCollege.Infrastructure.Data;
 using GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories;
 
-using GovernmentTechnicalVocationalCollege.Presentation.Persistence.AdmissionRepository.Implementation;
+
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -40,6 +43,9 @@ builder.Services.AddScoped<IAcademicSessionService, AcademicSessionService>();
 
 builder.Services.AddScoped<IAdmissionRepository, AdmissionRepository>();
 builder.Services.AddScoped<IAdmissionService, AdmissionService>();
+
+builder.Services.AddScoped<IInstructorRepository,InstructorRepository>();
+builder.Services.AddScoped<IInstructorService,InstructorService>();
 
 
 builder.Services.AddScoped<INumberGeneratorService,NumberGenerationService>();
