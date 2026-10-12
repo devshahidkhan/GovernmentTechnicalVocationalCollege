@@ -103,6 +103,44 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
                     b.ToTable("Admissions");
                 });
 
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AcademicSessionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("AssignedDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("InstructorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("TrainingProgramId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AcademicSessionId");
+
+                    b.HasIndex("InstructorId");
+
+                    b.HasIndex("TrainingProgramId");
+
+                    b.ToTable("InstructingAssignments");
+                });
+
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Instructor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -309,9 +347,43 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
                     b.Navigation("TrainingProgram");
                 });
 
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", b =>
+                {
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.AcademicSession", "AcademicSession")
+                        .WithMany("InstructingAssignments")
+                        .HasForeignKey("AcademicSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.Instructor", "Instructor")
+                        .WithMany("InstructingAssignments")
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.TrainingProgram", "TrainingProgram")
+                        .WithMany("InstructingAssignments")
+                        .HasForeignKey("TrainingProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AcademicSession");
+
+                    b.Navigation("Instructor");
+
+                    b.Navigation("TrainingProgram");
+                });
+
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.AcademicSession", b =>
                 {
                     b.Navigation("Admissions");
+
+                    b.Navigation("InstructingAssignments");
+                });
+
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Instructor", b =>
+                {
+                    b.Navigation("InstructingAssignments");
                 });
 
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Student", b =>
@@ -322,6 +394,8 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.TrainingProgram", b =>
                 {
                     b.Navigation("Admissions");
+
+                    b.Navigation("InstructingAssignments");
                 });
 #pragma warning restore 612, 618
         }

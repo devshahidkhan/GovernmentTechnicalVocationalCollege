@@ -18,5 +18,6 @@
 
         // Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
+        public ICollection<InstructingAssignment> InstructingAssignments { get; set; } = new List<InstructingAssignment>();
     }
 }

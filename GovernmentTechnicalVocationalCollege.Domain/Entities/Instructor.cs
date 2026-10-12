@@ -26,7 +26,7 @@
 
         public DateTime? UpdatedAt { get; set; }
 
-        //// Relationships
-        //public ICollection<TeachingAssignment> TeachingAssignments { get; set; } = new List<TeachingAssignment>();
+        // Relationships
+        public ICollection<InstructingAssignment> InstructingAssignments { get; set; } = new List<InstructingAssignment>();
     }
 }

@@ -21,7 +21,8 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public DateTime CreatedAt { get; set; } 
 
         public DateTime? UpdatedAt { get; set; }
-
+        //Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
+        public ICollection<InstructingAssignment> InstructingAssignments { get; set; } = new List<InstructingAssignment>();
     }
 }
