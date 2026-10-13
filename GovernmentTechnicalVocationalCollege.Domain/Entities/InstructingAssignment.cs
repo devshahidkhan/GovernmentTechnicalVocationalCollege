@@ -27,5 +27,6 @@
         public TrainingProgram TrainingProgram { get; set; } = null!;
 
         public AcademicSession AcademicSession { get; set; } = null!;
+        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
     }
 }

@@ -24,5 +24,6 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         //Relationships
         public ICollection<Admission> Admissions { get; set; } = new List<Admission>();
         public ICollection<InstructingAssignment> InstructingAssignments { get; set; } = new List<InstructingAssignment>();
+        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
     }
 }

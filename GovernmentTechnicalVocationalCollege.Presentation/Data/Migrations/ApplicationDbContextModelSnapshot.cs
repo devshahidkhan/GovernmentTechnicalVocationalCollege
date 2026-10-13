@@ -103,6 +103,47 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
                     b.ToTable("Admissions");
                 });
 
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Attendance", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("AdmissionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateOnly>("AttendanceDate")
+                        .HasColumnType("date");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("InstructingAssignmentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("TrainingProgramId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdmissionId");
+
+                    b.HasIndex("InstructingAssignmentId");
+
+                    b.HasIndex("TrainingProgramId");
+
+                    b.ToTable("Attendances");
+                });
+
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -347,6 +388,29 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
                     b.Navigation("TrainingProgram");
                 });
 
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Attendance", b =>
+                {
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.Admission", "Admission")
+                        .WithMany("Attendances")
+                        .HasForeignKey("AdmissionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", "InstructingAssignment")
+                        .WithMany("Attendances")
+                        .HasForeignKey("InstructingAssignmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.TrainingProgram", null)
+                        .WithMany("Attendances")
+                        .HasForeignKey("TrainingProgramId");
+
+                    b.Navigation("Admission");
+
+                    b.Navigation("InstructingAssignment");
+                });
+
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", b =>
                 {
                     b.HasOne("GovernmentTechnicalVocationalCollege.Domain.Entities.AcademicSession", "AcademicSession")
@@ -381,6 +445,16 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
                     b.Navigation("InstructingAssignments");
                 });
 
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Admission", b =>
+                {
+                    b.Navigation("Attendances");
+                });
+
+            modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.InstructingAssignment", b =>
+                {
+                    b.Navigation("Attendances");
+                });
+
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.Instructor", b =>
                 {
                     b.Navigation("InstructingAssignments");
@@ -394,6 +468,8 @@ namespace GovernmentTechnicalVocationalCollege.Infrastructure.Data.Migrations
             modelBuilder.Entity("GovernmentTechnicalVocationalCollege.Domain.Entities.TrainingProgram", b =>
                 {
                     b.Navigation("Admissions");
+
+                    b.Navigation("Attendances");
 
                     b.Navigation("InstructingAssignments");
                 });

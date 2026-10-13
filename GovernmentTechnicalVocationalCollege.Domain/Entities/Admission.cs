@@ -33,5 +33,6 @@ namespace GovernmentTechnicalVocationalCollege.Domain.Entities
         public Student Student { get; set; } = null!;
         public TrainingProgram TrainingProgram { get; set; } = null!;
         public AcademicSession AcademicSession { get; set; } = null!;
+        public ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
     }
 }

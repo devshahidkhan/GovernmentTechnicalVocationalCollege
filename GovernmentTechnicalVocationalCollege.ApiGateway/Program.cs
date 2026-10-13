@@ -2,6 +2,8 @@ using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionS
 using GovernmentTechnicalVocationalCollege.Application.Services.AcademicSessionService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.AdmissionService.Interface;
+using GovernmentTechnicalVocationalCollege.Application.Services.AttendanceService.Implementation;
+using GovernmentTechnicalVocationalCollege.Application.Services.AttendanceService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.InstructingAssignmentService.Implementation;
 using GovernmentTechnicalVocationalCollege.Application.Services.InstructingAssignmentService.Interface;
 using GovernmentTechnicalVocationalCollege.Application.Services.InstructorService.Implementation;
@@ -13,14 +15,13 @@ using GovernmentTechnicalVocationalCollege.Application.Services.ProgramService.I
 using GovernmentTechnicalVocationalCollege.Application.Services.StudentService;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AcademicSessionRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.AdmissionRepository.Interface;
+using GovernmentTechnicalVocationalCollege.Domain.Repositories.AttendanceRepository;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.InstructingAssignmentRepository;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.InstructorRepository;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.ProgramRepository.Interface;
 using GovernmentTechnicalVocationalCollege.Domain.Repositories.StudentRepository;
 using GovernmentTechnicalVocationalCollege.Infrastructure.Data;
 using GovernmentTechnicalVocationalCollege.Infrastructure.Persistence.Repositories;
-
-
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +56,9 @@ builder.Services.AddScoped<INumberGeneratorService,NumberGenerationService>();
 
 builder.Services.AddScoped<IInstructingAssignmentRepository, InstructingAssignmentRepository>();
 builder.Services.AddScoped<IInstructingAssignmentService, InstructingAssignmentService>();
+
+builder.Services.AddScoped<IAttendanceRepository,AttendanceRepository>();
+builder.Services.AddScoped<IAttendanceService,AttendanceService>();
 
 builder.Services.AddSwaggerGen();
 var app = builder.Build();

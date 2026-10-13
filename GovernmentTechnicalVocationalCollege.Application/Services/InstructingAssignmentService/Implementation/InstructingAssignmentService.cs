@@ -20,35 +20,29 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
         public async Task<ApiResponse<string>> CreateInstructingAssignmentAsync(CreateInstructingAssignmentRequest request)
         {
             // 1. Check whether the instructor exists.
-            var instructor = await instructorRepository.GetByIdAsync(
-                request.InstructorId);
+            var instructor = await instructorRepository.GetByIdAsync(request.InstructorId);
 
             if (instructor is null)
             {
-                return ApiResponse<string>.Failure(
-                    "Instructor does not exist.");
+                return ApiResponse<string>.Failure("Instructor does not exist.");
             }
 
             if (!instructor.IsActive)
             {
-                return ApiResponse<string>.Failure(
-                    "An inactive instructor cannot receive a new active assignment.");
+                return ApiResponse<string>.Failure("An inactive instructor cannot receive a new active assignment.");
             }
 
             // 2. Check whether the training program exists.
-            var program = await programRepository.GetByIdAsync(
-                request.TrainingProgramId);
+            var program = await programRepository.GetByIdAsync(request.TrainingProgramId);
 
             if (program is null)
             {
-                return ApiResponse<string>.Failure(
-                    "Training program does not exist.");
+                return ApiResponse<string>.Failure("Training program does not exist.");
             }
 
             if (!program.IsActive)
             {
-                return ApiResponse<string>.Failure(
-                    "An inactive training program cannot receive an active assignment.");
+                return ApiResponse<string>.Failure("An inactive training program cannot receive an active assignment.");
             }
 
             // 3. Check whether the academic session exists.
@@ -57,8 +51,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
             if (session is null)
             {
-                return ApiResponse<string>.Failure(
-                    "Academic session does not exist.");
+                return ApiResponse<string>.Failure("Academic session does not exist.");
             }
 
             // 4. Prevent multiple active assignments for the same
@@ -70,8 +63,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
             if (hasActiveAssignment)
             {
-                return ApiResponse<string>.Failure(
-                    "An active teacher is already assigned to this training program for this academic session. Deactivate the existing assignment first.");
+                return ApiResponse<string>.Failure("An active teacher is already assigned to this training program for this academic session. Deactivate the existing assignment first.");
             }
 
             // 5. Map the request to the entity.
@@ -81,8 +73,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
             await repository.AddAsync(assignment);
             await repository.SaveChangesAsync();
 
-            return ApiResponse<string>.Success(
-                "Instructing assignment created successfully.");
+            return ApiResponse<string>.Success("Instructing assignment created successfully.");
         }
 
         public async Task<List<InstructingAssignmentListResponse>> GetAllAsync()
@@ -106,8 +97,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
             if (assignment is null)
             {
-                return ApiResponse<string>.Failure(
-                    "Instructing assignment does not exist.");
+                return ApiResponse<string>.Failure("Instructing assignment does not exist.");
             }
 
             // 2. Only perform additional checks when activating.
@@ -118,8 +108,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
                 if (instructor is null || !instructor.IsActive)
                 {
-                    return ApiResponse<string>.Failure(
-                        "The assigned instructor does not exist or is inactive.");
+                    return ApiResponse<string>.Failure("The assigned instructor does not exist or is inactive.");
                 }
 
                 var program = await programRepository.GetByIdAsync(
@@ -127,8 +116,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
                 if (program is null || !program.IsActive)
                 {
-                    return ApiResponse<string>.Failure(
-                        "The assigned training program does not exist or is inactive.");
+                    return ApiResponse<string>.Failure("The assigned training program does not exist or is inactive.");
                 }
 
                 // Exclude this assignment from the duplicate check.
@@ -140,8 +128,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
 
                 if (hasAnotherActiveAssignment)
                 {
-                    return ApiResponse<string>.Failure(
-                        "Another active instuctor assignment already exists for this training program and academic session.");
+                    return ApiResponse<string>.Failure("Another active instuctor assignment already exists for this training program and academic session.");
                 }
             }
 
@@ -151,10 +138,7 @@ namespace GovernmentTechnicalVocationalCollege.Application.Services.InstructingA
             // 4. Save changes.
             await repository.SaveChangesAsync();
 
-            return ApiResponse<string>.Success(
-                request.IsActive
-                    ? "Instucting assignment activated successfully."
-                    : "Instucting assignment deactivated successfully.");
+            return ApiResponse<string>.Success(request.IsActive? "Instucting assignment activated successfully.": "Instucting assignment deactivated successfully.");
         }
     }
 }
